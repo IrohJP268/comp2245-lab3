@@ -39,3 +39,44 @@ function buildBoard() {
     board.appendChild(card);
   }
 }
+
+// turn a card over and back
+function flipCard(card) {
+  const index = Number(card.dataset.index);
+  const fruit = deck[index];
+
+  card.textContent = fruit.symbol;
+  card.classList.add("flipped");
+  card.setAttribute("aria-label", `Card ${index + 1}, ${fruit.name}`);
+}
+
+function unflipCard(card) {
+  const index = Number(card.dataset.index);
+
+  card.textContent = "";
+  card.classList.remove("flipped");
+  card.setAttribute("aria-label", `Card ${index + 1}, face down`);
+}
+
+// Event delegation
+board.addEventListener("click", (event) => {
+  const card = event.target;
+
+  // Ignore a card that is already face up
+  if (card.classList.contains("flipped")) {
+    return;
+  }
+
+  // Ignore clicks that are not on a card and clicks during the 1 second wait
+  if (!card.classList.contains("card") || waiting) {
+    return;
+  }
+
+
+  flipCard(card);
+  flippedCards.push(card);
+
+  if (flippedCards.length === 2) {
+    checkForMatch();
+  }
+});
