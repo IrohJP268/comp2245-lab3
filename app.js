@@ -21,14 +21,14 @@ return array;
 }
 
 // State of the game
-let deck = []; // the shuffled fruits; deck[0] is the first card on the board
-let flippedCards = []; // the cards that are face up in this move (0, 1 or 2)
+let deck = []; // the shuffled fruits
+let flippedCards = []; // the cards that are face up in this move 
 let moves = 0;
 let matchedPairs = 0;
 let waiting = false; // true while two cards wait to turn back over
 let timerId = null; // identifies the setTimeout so New game can cancel it
 
-
+// Element references
 const board = document.querySelector("#board");
 const movesDisplay = document.querySelector("#moves");
 const statusMessage = document.querySelector("#status");
@@ -116,7 +116,7 @@ function checkForMatch() {
       statusMessage.textContent = "That's a pair!";
     }
   } else {
-    // Not a pair: let the player see the cards, then turn them back
+    // Not a pair
     statusMessage.textContent = "Not a pair. Try again.";
     waiting = true;
 
