@@ -80,3 +80,44 @@ board.addEventListener("click", (event) => {
     checkForMatch();
   }
 });
+
+
+// Check if the two flipped cards match
+function checkForMatch() {
+  moves++;
+  movesDisplay.textContent = moves;
+
+  const [first, second] = flippedCards;
+  const firstFruit = deck[Number(first.dataset.index)];
+  const secondFruit = deck[Number(second.dataset.index)];
+
+  if (firstFruit.name === secondFruit.name) {
+    // A pair
+    first.classList.add("matched");
+    second.classList.add("matched");
+    first.disabled = true;
+    second.disabled = true;
+    flippedCards = [];
+    matchedPairs++;
+
+    if (matchedPairs === fruits.length) {
+      // The game is over
+      statusMessage.textContent = `You found all the pairs in ${moves} moves!`;
+      statusMessage.classList.add("you-won");
+    } else {
+      statusMessage.textContent = "That's a pair!";
+    }
+  } else {
+    // Not a pair: let the player see the cards, then turn them back
+    statusMessage.textContent = "Not a pair. Try again.";
+    waiting = true;
+
+    timerId = setTimeout(() => {
+      unflipCard(first);
+      unflipCard(second);
+      flippedCards = [];
+      waiting = false;
+      timerId = null;
+    }, 1000);
+  }
+}
