@@ -1,3 +1,5 @@
+// Jonathan Payne 500003038 comp2245 lab 3
+
 const fruits = [
 { name: "apple", symbol: "🍎 " },
 { name: "banana", symbol: "🍌 " },
@@ -121,3 +123,27 @@ function checkForMatch() {
     }, 1000);
   }
 }
+
+// Creating a new game
+function newGame() {
+  // Cancel a pending timer so it can't touch the new game
+  clearTimeout(timerId);
+  timerId = null;
+  waiting = false;
+
+  board.replaceChildren();
+  flippedCards = [];
+  moves = 0;
+  matchedPairs = 0;
+
+  movesDisplay.textContent = moves;
+  statusMessage.textContent = "Turn over two cards to find a matching pair.";
+  statusMessage.classList.remove("you-won");
+
+  buildBoard();
+}
+
+newGameButton.addEventListener("click", newGame);
+
+// Start the first game when the page loads
+buildBoard();
