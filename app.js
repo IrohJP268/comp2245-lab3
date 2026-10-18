@@ -1,14 +1,15 @@
 // Jonathan Payne 500003038 comp2245 lab 3
 
+
 const fruits = [
-{ name: "apple", symbol: "🍎 " },
-{ name: "banana", symbol: "🍌 " },
-{ name: "cherry", symbol: "🍒 " },
-{ name: "coconut", symbol: "🥥 " },
-{ name: "grapes", symbol: "🍇 " },
-{ name: "mango", symbol: "🥭 " },
-{ name: "pineapple", symbol: "🍍 " },
-{ name: "watermelon", symbol: "🍉 " },
+{ name: "apple", symbol: "🍎" },
+{ name: "banana", symbol: "🍌" },
+{ name: "cherry", symbol: "🍒" },
+{ name: "coconut", symbol: "🥥" },
+{ name: "grapes", symbol: "🍇" },
+{ name: "mango", symbol: "🥭" },
+{ name: "pineapple", symbol: "🍍" },
+{ name: "watermelon", symbol: "🍉" },
 ];
 
 function shuffle(array) {
@@ -27,6 +28,11 @@ let matchedPairs = 0;
 let waiting = false; // true while two cards wait to turn back over
 let timerId = null; // identifies the setTimeout so New game can cancel it
 
+
+const board = document.querySelector("#board");
+const movesDisplay = document.querySelector("#moves");
+const statusMessage = document.querySelector("#status");
+const newGameButton = document.querySelector("#new-game");
 
 // build a shuffled board
 function buildBoard() {
